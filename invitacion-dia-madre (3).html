@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#f7d5e2">
+<title>Invitación Día de la Madre 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ── VARIABLES ── */
+:root {
+  --rose:      #e8a0b0;
+  --rose-deep: #a03060;
+  --gold:      #8a6220;
+  --dark:      #1a0a14;
+  --text:      #2e0e20;
+  --card-bg:   #fff8fb;
+}
+
+/* ── RESET & BASE ── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+html, body {
+  width:100%; min-height:100%;
+  font-family:'Cormorant Garamond', Georgia, serif;
+  background: linear-gradient(160deg, #fce8ef 0%, #f7d5e2 50%, #edd0dc 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 24px 0 40px;
+  min-height: 100dvh;
+}
+
+/* ── PETALS ── */
+.petals-bg { position:fixed; inset:0; pointer-events:none; z-index:0; overflow:hidden; }
+.petal {
+  position:absolute;
+  background: radial-gradient(ellipse at 40% 30%, #f8c5d4, #e896b0, #d06888);
+  border-radius: 50% 5% 50% 5%;
+  opacity: 0;
+  animation: fallPetal linear infinite;
+}
+@keyframes fallPetal {
+  0%   { opacity:0;   transform:translateY(-40px) rotate(0deg); }
+  10%  { opacity:.65; }
+  90%  { opacity:.4;  }
+  100% { opacity:0;   transform:translateY(105vh) rotate(380deg) translateX(30px); }
+}
+
+/* ── SCENE ── */
+.scene {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 480px;
+  padding: 0 16px;
+}
+
+/* ══════════════════════════════
+   ENVELOPE
+══════════════════════════════ */
+.envelope-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding-top: 10vh;
+}
+
+.envelope-hint {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.2rem, 5vw, 1.5rem);
+  color: var(--rose-deep);
+  text-align: center;
+  margin-bottom: 28px;
+  animation: pulse 2s ease-in-out infinite;
+  line-height: 1.4;
+}
+@keyframes pulse {
+  0%,100% { opacity:.65; transform:scale(1);    }
+  50%      { opacity:1;   transform:scale(1.04); }
+}
+
+/* envelope scales with screen */
+.envelope {
+  width: min(280px, 80vw);
+  aspect-ratio: 3/2;
+  position: relative;
+  filter: drop-shadow(0 10px 30px rgba(160,48,96,.3));
+}
+.env-body {
+  width:100%; height:100%;
+  background: linear-gradient(160deg,#f9dfe7,#f0c8d5,#e8afc0);
+  border-radius: 4px 4px 8px 8px;
+  position: absolute; bottom:0;
+}
+/* triangle sides using pseudo — avoids px-based border hacks */
+.env-left, .env-right {
+  position:absolute; bottom:0;
+  width:0; height:0;
+}
+.env-left  { border-bottom: min(200px,57vw) solid #f0ccdc; border-right: min(140px,40vw) solid transparent; }
+.env-right { right:0; border-bottom: min(200px,57vw) solid #e8bfcf; border-left: min(140px,40vw) solid transparent; }
+.env-flap {
+  position:absolute; top:0; left:0;
+  width:100%; height:0;
+  border-left:  50% solid transparent;
+  border-right: 50% solid transparent;
+  border-top: min(130px,37vw) solid #f0c0d2;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 1.1s cubic-bezier(.4,0,.2,1);
+  z-index: 5;
+}
+.envelope.open .env-flap { transform:rotateX(-180deg); }
+.env-seal {
+  position:absolute; top:50%; left:50%;
+  transform: translate(-50%,-50%);
+  width: clamp(40px,12vw,56px);
+  height: clamp(40px,12vw,56px);
+  background: radial-gradient(circle at 38% 33%, #c9a96e, #8a6220);
+  border-radius: 50%;
+  display: flex; align-items:center; justify-content:center;
+  font-size: clamp(1.1rem,4vw,1.5rem);
+  box-shadow: 0 3px 14px rgba(130,98,32,.4);
+  z-index: 6;
+  transition: opacity .4s;
+}
+.envelope.open .env-seal { opacity:0; }
+
+.env-btn {
+  margin-top: 32px;
+  padding: 16px 44px;
+  min-height: 54px;           /* touch target */
+  background: linear-gradient(135deg, var(--rose-deep), #8a2040);
+  color: #fff;
+  border: none;
+  border-radius: 40px;
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1.15rem, 4.5vw, 1.4rem);
+  cursor: pointer;
+  box-shadow: 0 6px 22px rgba(160,48,96,.38);
+  -webkit-appearance: none;
+  touch-action: manipulation;
+}
+.env-btn:active { transform: scale(.97); }
+
+/* ══════════════════════════════
+   CARD
+══════════════════════════════ */
+#cardWrap { display:none; width:100%; }
+
+.card {
+  background: linear-gradient(170deg, #fff8fb 0%, #fdedf2 50%, #f9dce8 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 16px 60px rgba(160,48,96,.2), 0 2px 8px rgba(200,100,130,.12);
+  border: 1px solid rgba(200,130,155,.2);
+  animation: slideUp .7s ease both;
+}
+@keyframes slideUp {
+  from { opacity:0; transform:translateY(36px) scale(.96); }
+  to   { opacity:1; transform:translateY(0)    scale(1);   }
+}
+
+/* top color band */
+.card-band { height:7px; background:linear-gradient(90deg, var(--rose-deep), #c9a96e, var(--rose-deep)); }
+
+/* hero */
+.card-hero {
+  padding: clamp(24px,6vw,40px) clamp(20px,5vw,32px) 16px;
+  text-align: center;
+  position: relative;
+}
+.flower-corner {
+  position:absolute; font-size:clamp(1.4rem,5vw,2rem);
+  opacity:.45; pointer-events:none;
+  animation: floatF 5s ease-in-out infinite;
+}
+@keyframes floatF { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px) rotate(7deg)} }
+
+.card-sub {
+  font-style: italic;
+  font-size: clamp(.8rem,3.2vw,1rem);
+  color: var(--rose-deep);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.card-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.6rem,12vw,4rem);
+  color: var(--dark);
+  line-height: 1;
+}
+.card-title span {
+  display: block;
+  font-size: clamp(1.6rem,7vw,2.4rem);
+  color: var(--rose-deep);
+  margin-top: 2px;
+}
+.card-promo {
+  margin-top: 10px;
+  font-size: clamp(.75rem,3vw,.9rem);
+  color: var(--gold);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* divider */
+.divider {
+  display:flex; align-items:center; gap:10px;
+  padding: 0 clamp(16px,5vw,28px);
+  margin: 12px 0;
+}
+.div-line { flex:1; height:1px; background:linear-gradient(90deg,transparent,var(--rose),transparent); }
+
+/* body */
+.card-body { padding: 0 clamp(16px,5vw,28px) clamp(20px,6vw,30px); }
+
+.msg {
+  font-size: clamp(.95rem,3.8vw,1.08rem);
+  line-height: 1.8;
+  color: var(--text);
+  text-align: justify;
+  font-style: italic;
+}
+
+/* venue */
+.venue {
+  margin: 20px 0;
+  background: linear-gradient(135deg,rgba(232,160,176,.2),rgba(201,169,110,.1));
+  border-left: 3px solid var(--rose-deep);
+  border-radius: 0 12px 12px 0;
+  padding: clamp(12px,4vw,18px) clamp(14px,4vw,20px);
+}
+.venue-lbl  { font-style:italic; font-size:clamp(.72rem,2.8vw,.82rem); letter-spacing:.16em; text-transform:uppercase; color:var(--rose-deep); margin-bottom:4px; }
+.venue-name { font-family:'Playfair Display',serif; font-size:clamp(1.2rem,5.5vw,1.6rem); font-weight:700; color:var(--dark); }
+.venue-addr { font-size:clamp(.82rem,3.2vw,.92rem); color:var(--text); margin-top:4px; line-height:1.55; }
+
+/* date / time pills */
+.dt-row { display:flex; gap:10px; margin:18px 0; }
+.dt-pill {
+  flex:1;
+  background: linear-gradient(135deg,var(--rose-deep),#7a1838);
+  color:#fff;
+  border-radius: 14px;
+  padding: clamp(12px,4vw,16px) 8px;
+  text-align:center;
+  box-shadow: 0 5px 16px rgba(140,30,60,.25);
+}
+.dt-pill .ic  { font-size:clamp(1.2rem,5vw,1.5rem); display:block; }
+.dt-pill .val { font-family:'Playfair Display',serif; font-size:clamp(1rem,4.2vw,1.2rem); font-weight:700; display:block; margin-top:2px; }
+.dt-pill .lbl { font-size:clamp(.65rem,2.5vw,.75rem); letter-spacing:.1em; text-transform:uppercase; opacity:.9; }
+
+/* quote */
+.quote {
+  margin: 18px 0;
+  background: linear-gradient(135deg,rgba(201,169,110,.15),rgba(232,160,176,.1));
+  border-radius: 12px;
+  padding: clamp(14px,4vw,18px) clamp(16px,5vw,22px);
+  text-align:center;
+  position:relative;
+}
+.quote::before {
+  content:'"';
+  font-family:'Playfair Display',serif;
+  font-size:2.8rem; color:var(--gold); opacity:.35;
+  position:absolute; top:2px; left:12px; line-height:1;
+}
+.quote p {
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:clamp(.88rem,3.5vw,1rem);
+  color:var(--text);
+  line-height:1.7;
+}
+
+/* footer */
+.card-footer {
+  padding: clamp(14px,4vw,18px) clamp(16px,5vw,28px) clamp(20px,6vw,28px);
+  text-align:center;
+  border-top:1px solid rgba(200,130,155,.18);
+}
+.sign {
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(1rem,4vw,1.15rem);
+  color:var(--rose-deep);
+  line-height:1.7;
+}
+.sign strong { font-size:clamp(1.1rem,4.5vw,1.3rem); display:block; color:var(--dark); }
+
+/* back button */
+.back-btn {
+  margin-top: 16px;
+  display: block;
+  width: 100%;
+  min-height: 50px;
+  background: transparent;
+  border: 1.5px solid var(--rose-deep);
+  color: var(--rose-deep);
+  border-radius: 40px;
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(1rem,4vw,1.15rem);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+}
+.back-btn:active { background:var(--rose-deep); color:#fff; }
+
+/* confetti */
+.cf { position:fixed; opacity:0; border-radius:2px; animation:cfFall 2.4s ease-in forwards; pointer-events:none; z-index:999; }
+@keyframes cfFall {
+  0%   { opacity:1; transform:translateY(0) rotate(0deg); }
+  85%  { opacity:.8; }
+  100% { opacity:0; transform:translateY(100vh) rotate(700deg) scale(.2); }
+}
+</style>
+</head>
+<body>
+
+<div class="petals-bg" id="petalsBg"></div>
+<audio id="bgMusic" loop playsinline><source src="cancion.mp3" type="audio/mpeg"></audio>
+
+<div class="scene">
+
+  <!-- ══ SOBRE ══ -->
+  <div class="envelope-wrap" id="envelopeWrap">
+    <p class="envelope-hint">✦ Toca para abrir<br>tu invitación ✦</p>
+    <div class="envelope" id="envelope">
+      <div class="env-body"></div>
+      <div class="env-left"></div>
+      <div class="env-right"></div>
+      <div class="env-flap"></div>
+      <div class="env-seal">🌸</div>
+    </div>
+    <button class="env-btn" onclick="openInvitation()">Abrir invitación ✨</button>
+  </div>
+
+  <!-- ══ TARJETA ══ -->
+  <div id="cardWrap">
+    <div class="card">
+
+      <div class="card-band"></div>
+
+      <div class="card-hero">
+        <span class="flower-corner" style="top:12px;left:12px;animation-delay:.4s">🌸</span>
+        <span class="flower-corner" style="top:12px;right:12px;animation-delay:1.3s">🌷</span>
+        <p class="card-sub">De parte de la</p>
+        <h1 class="card-title">Feliz Día<span>MAMÁ 🌸</span></h1>
+        <p class="card-promo">✦ Promo 2026 · Amerinst B ✦</p>
+      </div>
+
+      <div class="divider"><div class="div-line"></div><span>🌺</span><div class="div-line"></div></div>
+
+      <div class="card-body">
+
+        <p class="msg">
+          ¡Estimadas madres de familia de la Promoción 2026! La Promoción 2026 de la Unidad Educativa Amerinst tiene el honor de invitarlas a compartir un momento muy especial en conmemoración al Día de la Madre. Queremos celebrar junto a ustedes todo el amor, esfuerzo y apoyo que nos brindan cada día, porque detrás de cada estudiante siempre está una mamá que estuvo ahí para cada uno de nosotros.
+        </p>
+
+        <div class="divider" style="margin:18px 0"><div class="div-line"></div><span>✦</span><div class="div-line"></div></div>
+
+        <div class="venue">
+          <p class="venue-lbl">📍 Lugar del evento</p>
+          <p class="venue-name">QUINTA SOLEDAD</p>
+          <p class="venue-addr">Entre Av. América y Av. Pulacayo<br>sobre Manchay Puito · CBBA-BOL</p>
+        </div>
+
+        <div class="dt-row">
+          <div class="dt-pill">
+            <span class="ic">📅</span>
+            <span class="val">26 Mar 2026</span>
+            <span class="lbl">Fecha</span>
+          </div>
+          <div class="dt-pill">
+            <span class="ic">🕔</span>
+            <span class="val">17:00 PM</span>
+            <span class="lbl">Hora</span>
+          </div>
+        </div>
+
+        <div class="quote">
+          <p>Cada 27 de mayo, se recuerda el amor y valentía de las madres y mujeres bolivianas.</p>
+        </div>
+
+        <p class="msg" style="text-align:center;margin-top:16px;font-style:normal;">
+          Será una ocasión llena de alegría, cariño y gratitud, donde esperamos poder homenajearlas como se merecen.<br><br>
+          <em>Esperamos contar con su valiosa presencia para hacer de este día un recuerdo hermoso e inolvidable.</em>
+        </p>
+
+      </div><!-- /card-body -->
+
+      <div class="card-footer">
+        <p class="sign">
+          Con todo nuestro cariño,<br>
+          <strong>Promoción 2026 · CBBA-BOL</strong>
+          Unidad Educativa Amerinst B
+        </p>
+      </div>
+
+    </div><!-- /card -->
+    <button class="back-btn" onclick="closeInvitation()">← Cerrar invitación</button>
+  </div>
+
+</div><!-- /scene -->
+
+<script>
+/* ── PÉTALOS ── */
+(function(){
+  var bg=document.getElementById('petalsBg');
+  for(var i=0;i<16;i++){
+    var p=document.createElement('div'); p.className='petal';
+    p.style.left=Math.random()*100+'%';
+    p.style.width=(10+Math.random()*10)+'px';
+    p.style.height=(14+Math.random()*12)+'px';
+    p.style.animationDuration=(8+Math.random()*8)+'s';
+    p.style.animationDelay=(Math.random()*12)+'s';
+    bg.appendChild(p);
+  }
+})();
+
+/* ── CONFETTI ── */
+function confetti(){
+  var cols=['#e8a0b0','#c96b85','#c9a96e','#f5d6df','#ffd700','#fff'];
+  for(var i=0;i<50;i++){
+    (function(){
+      var c=document.createElement('div'); c.className='cf';
+      c.style.left=Math.random()*100+'vw';
+      c.style.top='-8px';
+      c.style.background=cols[Math.floor(Math.random()*cols.length)];
+      c.style.borderRadius=Math.random()>.5?'50%':'2px';
+      var sz=(5+Math.random()*7)+'px';
+      c.style.width=sz; c.style.height=sz;
+      c.style.animationDelay=(Math.random()*1.2)+'s';
+      c.style.animationDuration=(1.6+Math.random()*1.4)+'s';
+      document.body.appendChild(c);
+      setTimeout(function(){ c.remove(); },3800);
+    })();
+  }
+}
+
+/* ── ABRIR / CERRAR ── */
+function openInvitation(){
+  document.getElementById('envelope').classList.add('open');
+  setTimeout(function(){
+    document.getElementById('envelopeWrap').style.display='none';
+    document.getElementById('cardWrap').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+    confetti();
+    var a=document.getElementById('bgMusic');
+    a.play().catch(function(){
+      document.body.addEventListener('touchstart',function(){ a.play(); },{once:true});
+      document.body.addEventListener('click',function(){ a.play(); },{once:true});
+    });
+  },1200);
+}
+
+function closeInvitation(){
+  document.getElementById('cardWrap').style.display='none';
+  document.getElementById('envelopeWrap').style.display='flex';
+  document.getElementById('envelope').classList.remove('open');
+  document.getElementById('bgMusic').pause();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
